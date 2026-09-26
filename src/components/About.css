@@ -1,0 +1,140 @@
+.about {
+  background-color: var(--color-bg);
+}
+
+.about-paths {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(5rem, 10vw, 9rem);
+}
+
+/* --- Track heading --- */
+.path-track-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.path-track-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.path-track-head h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.path-track-note {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
+/* --- The path itself --- */
+.path-line {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.path-node {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.path-dot {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  background: var(--color-bg);
+  border: 1px solid var(--color-accent);
+  transform: rotate(45deg);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.path-node--current .path-dot {
+  background: var(--color-accent);
+  box-shadow: 0 0 14px rgba(230, 57, 70, 0.8);
+}
+
+.path-node-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+  transition: color 0.3s ease;
+}
+
+.path-node--current .path-node-title {
+  color: var(--color-accent);
+}
+
+.path-node-meta {
+  font-size: 0.82rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.path-node:hover .path-dot {
+  background: var(--color-accent);
+}
+
+.path-node:hover .path-node-title {
+  color: var(--color-accent);
+}
+
+.path-arrow {
+  display: flex;
+  color: var(--color-accent);
+  opacity: 0.55;
+  /* Points down while the path is stacked. */
+  transform: rotate(90deg);
+}
+
+@media (min-width: 992px) {
+  .path-line {
+    position: relative;
+    flex-direction: row;
+    gap: 0.6rem;
+  }
+
+  /* Rail joining the milestone markers, from first dot centre to last. */
+  .path-line::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .path-node {
+    flex: 1 1 0;
+    min-width: 0;
+    /* Sits above the rail so each dot masks the line behind it. */
+    position: relative;
+  }
+
+  .path-arrow {
+    transform: none;
+    align-self: flex-start;
+    /* Centres the 18px chevron on the rail at y = 5.5px. */
+    margin-top: -3.5px;
+  }
+}
